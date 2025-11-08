@@ -93,15 +93,6 @@
             gap: 4px;
         }
 
-        .points-animation {
-            animation: pulse 0.6s ease;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
         /* コンテナ */
         .container {
             max-width: 430px;
@@ -148,6 +139,40 @@
             font-size: 13px;
             color: var(--text-secondary);
             margin-top: 4px;
+        }
+
+        /* ナビゲーションメニュー */
+        .nav-menu {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .nav-btn {
+            padding: 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .nav-btn:hover {
+            background: var(--bg-card-light);
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .nav-label {
+            font-size: 13px;
+            color: var(--text-secondary);
         }
 
         /* ステータスバッジ */
@@ -222,16 +247,6 @@
             background: var(--border);
         }
 
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
-
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-        }
-
         .btn-full {
             width: 100%;
         }
@@ -299,28 +314,11 @@
             cursor: pointer;
             transition: all 0.2s ease;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .choice-btn:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
-            transition: left 0.5s;
         }
 
         .choice-btn:hover {
             border-color: var(--primary);
             transform: translateY(-2px);
-        }
-
-        .choice-btn:hover:before {
-            left: 100%;
         }
 
         .choice-btn.selected {
@@ -399,31 +397,180 @@
             gap: 4px;
         }
 
-        /* 結果表示 */
-        .result-display {
-            padding: 12px;
-            border-radius: 10px;
-            margin-top: 12px;
+        /* 履歴アイテム */
+        .history-item {
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .history-match {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+
+        .history-question {
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .history-bet-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .history-choice {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .history-amount {
+            font-size: 14px;
+            color: var(--primary);
+        }
+
+        .history-result {
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
         }
 
         .result-win {
             background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.1));
             border: 1px solid rgba(34, 197, 94, 0.5);
+            color: var(--success);
         }
 
         .result-lose {
             background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
             border: 1px solid rgba(239, 68, 68, 0.5);
-        }
-
-        .result-cancelled {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1));
-            border: 1px solid rgba(245, 158, 11, 0.5);
+            color: var(--danger);
         }
 
         .result-pending {
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1));
             border: 1px solid rgba(59, 130, 246, 0.5);
+            color: var(--info);
+        }
+
+        /* ドラフトページ */
+        .draft-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .draft-tab {
+            padding: 10px 16px;
+            background: var(--bg-card-light);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .draft-tab:hover {
+            background: var(--bg-card);
+        }
+
+        .draft-tab.active {
+            background: var(--primary);
+            color: var(--bg-dark);
+            font-weight: bold;
+        }
+
+        .draft-team {
+            margin-bottom: 20px;
+        }
+
+        .draft-team-header {
+            padding: 12px;
+            border-radius: 10px 10px 0 0;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .team-t1 {
+            background: linear-gradient(135deg, var(--t1-color), rgba(200, 170, 110, 0.5));
+            color: var(--bg-dark);
+        }
+
+        .team-kt {
+            background: linear-gradient(135deg, var(--kt-color), rgba(220, 20, 60, 0.5));
+            color: white;
+        }
+
+        .draft-picks {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 0 0 10px 10px;
+            padding: 16px;
+        }
+
+        .draft-role {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 12px;
+            padding: 10px;
+            background: var(--bg-dark);
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .draft-role-label {
+            font-size: 12px;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+        }
+
+        .draft-pick-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .draft-champion {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .draft-player {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* ステータスカード */
+        .status-card {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-points {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--bg-dark);
+            margin-bottom: 8px;
+        }
+
+        .status-info {
+            font-size: 14px;
+            color: rgba(0,0,0,0.7);
         }
 
         /* モーダル */
@@ -446,11 +593,6 @@
             padding: 20px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
         .modal-content {
             background: var(--bg-card);
             border-radius: 16px;
@@ -458,17 +600,6 @@
             max-width: 400px;
             width: 100%;
             animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
         }
 
         .modal-header {
@@ -491,179 +622,20 @@
             gap: 12px;
         }
 
-        /* タブ */
-        .tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-            overflow-x: auto;
-            padding-bottom: 4px;
-        }
-
-        .tab {
-            padding: 10px 16px;
-            border-radius: 10px;
-            background: var(--bg-card-light);
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-            font-size: 14px;
-        }
-
-        .tab:hover {
-            border-color: var(--primary);
-        }
-
-        .tab.active {
-            background: var(--primary);
-            color: var(--bg-dark);
-            border-color: var(--primary);
-            font-weight: bold;
-        }
-
-        /* ステータスカード */
-        .status-card {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .status-card:before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .status-points {
-            font-size: 32px;
-            font-weight: bold;
-            color: var(--bg-dark);
-            margin-bottom: 8px;
-            position: relative;
-        }
-
-        .status-info {
-            font-size: 14px;
-            color: rgba(0,0,0,0.7);
-            position: relative;
-        }
-
-        /* ベット履歴 */
-        .history-item {
-            padding: 12px;
-            background: var(--bg-dark);
-            border-radius: 10px;
-            margin-bottom: 8px;
-        }
-
-        .history-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .history-title {
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .history-details {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
         /* アニメーション */
-        .fade-in {
-            animation: fadeIn 0.5s ease;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        .slide-in {
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
+        @keyframes slideUp {
             from {
-                transform: translateX(-20px);
+                transform: translateY(20px);
                 opacity: 0;
             }
             to {
-                transform: translateX(0);
+                transform: translateY(0);
                 opacity: 1;
-            }
-        }
-
-        /* ローディング */
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 200px;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid var(--border);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* エラーメッセージ */
-        .error-message {
-            padding: 12px;
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            border-radius: 10px;
-            color: var(--danger);
-            font-size: 14px;
-            margin-bottom: 16px;
-        }
-
-        /* 成功メッセージ */
-        .success-message {
-            padding: 12px;
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            border-radius: 10px;
-            color: var(--success);
-            font-size: 14px;
-            margin-bottom: 16px;
-        }
-
-        /* レスポンシブ */
-        @media (max-width: 375px) {
-            .container {
-                padding: 12px;
-            }
-            
-            .card {
-                padding: 16px;
-            }
-            
-            .status-points {
-                font-size: 28px;
             }
         }
     </style>
@@ -682,8 +654,10 @@
                 this.bets = [];
                 this.matches = this.generateMatches();
                 this.questions = this.generateQuestions();
+                this.draftData = this.generateDraftData();
                 this.currentView = 'login';
                 this.selectedMatch = null;
+                this.selectedDraftMatch = 1;
                 
                 this.loadData();
                 this.init();
@@ -731,6 +705,44 @@
                     { id: 'match-4', number: 4, status: 'upcoming' },
                     { id: 'match-5', number: 5, status: 'upcoming' }
                 ];
+            }
+
+            // ドラフトデータ生成
+            generateDraftData() {
+                return {
+                    1: {
+                        T1: [
+                            { role: 'top', champion: 'グラガス', player: 'Doran' },
+                            { role: 'jungle', champion: 'リー・シン', player: 'Oner' },
+                            { role: 'mid', champion: 'オリアンナ', player: 'Faker' },
+                            { role: 'bot', champion: 'ジンクス', player: 'Gumayusi' },
+                            { role: 'support', champion: 'ブラウム', player: 'Keria' }
+                        ],
+                        KT: [
+                            { role: 'top', champion: 'ケネン', player: 'PerfecT' },
+                            { role: 'jungle', champion: 'ヴィエゴ', player: 'Cuzz' },
+                            { role: 'mid', champion: 'アジール', player: 'Bdd' },
+                            { role: 'bot', champion: 'カイサ', player: 'deokdam' },
+                            { role: 'support', champion: 'ノーチラス', player: 'Peter' }
+                        ]
+                    },
+                    2: {
+                        T1: [
+                            { role: 'top', champion: 'ジェイス', player: 'Doran' },
+                            { role: 'jungle', champion: 'ヘカリム', player: 'Oner' },
+                            { role: 'mid', champion: 'サイラス', player: 'Faker' },
+                            { role: 'bot', champion: 'アフェリオス', player: 'Gumayusi' },
+                            { role: 'support', champion: 'スレッシュ', player: 'Keria' }
+                        ],
+                        KT: [
+                            { role: 'top', champion: 'ガングプランク', player: 'PerfecT' },
+                            { role: 'jungle', champion: 'グレイブス', player: 'Cuzz' },
+                            { role: 'mid', champion: 'ゾーイ', player: 'Bdd' },
+                            { role: 'bot', champion: 'トリスターナ', player: 'deokdam' },
+                            { role: 'support', champion: 'レオナ', player: 'Peter' }
+                        ]
+                    }
+                };
             }
 
             // お題データ生成
@@ -967,6 +979,10 @@
                     app.innerHTML = this.renderMatch();
                 } else if (this.currentView === 'series') {
                     app.innerHTML = this.renderSeries();
+                } else if (this.currentView === 'history') {
+                    app.innerHTML = this.renderHistory();
+                } else if (this.currentView === 'draft') {
+                    app.innerHTML = this.renderDraft();
                 }
                 
                 this.attachEventListeners();
@@ -1050,6 +1066,17 @@
                             </div>
                         </div>
 
+                        <div class="nav-menu">
+                            <div class="nav-btn" onclick="system.showHistory()">
+                                <div class="nav-icon">📋</div>
+                                <div class="nav-label">ベット履歴</div>
+                            </div>
+                            <div class="nav-btn" onclick="system.showDraft()">
+                                <div class="nav-icon">📊</div>
+                                <div class="nav-label">ドラフト</div>
+                            </div>
+                        </div>
+
                         <h2 style="font-size: 16px; margin-bottom: 12px; color: var(--text-secondary);">📅 試合一覧</h2>
                         ${this.matches.map(match => {
                             const matchBets = userBets.filter(b => {
@@ -1103,6 +1130,133 @@
                                 ログアウト
                             </button>
                         </div>
+                    </div>
+                `;
+            }
+
+            // 履歴画面
+            renderHistory() {
+                const userBets = this.getUserBets();
+
+                return `
+                    <div class="header">
+                        <div class="header-content">
+                            <button class="btn btn-sm btn-secondary" onclick="system.goHome()">
+                                ← 戻る
+                            </button>
+                            <div class="user-info">
+                                <div class="user-points">
+                                    <span>💰</span>
+                                    <span>${this.currentUser.currentPoint}p</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <h2 style="font-size: 20px; margin-bottom: 20px;">📋 ベット履歴</h2>
+
+                        ${userBets.length === 0 ? `
+                            <div class="card" style="text-align: center; color: var(--text-secondary);">
+                                まだベットがありません
+                            </div>
+                        ` : userBets.map(bet => {
+                            const question = this.questions.find(q => q.id === bet.questionId);
+                            const match = question.matchId ? 
+                                this.matches.find(m => m.id === question.matchId) : null;
+
+                            return `
+                                <div class="history-item">
+                                    <div class="history-match">
+                                        ${match ? `第${match.number}試合` : 'シリーズ全体'}
+                                    </div>
+                                    <div class="history-question">${question.title}</div>
+                                    <div class="history-bet-info">
+                                        <div class="history-choice">選択: ${bet.choice}</div>
+                                        <div class="history-amount">${bet.betPoint}p</div>
+                                    </div>
+                                    <div class="history-result result-${bet.status === 'won' ? 'win' : 
+                                                                       bet.status === 'lost' ? 'lose' : 
+                                                                       'pending'}">
+                                        ${bet.status === 'won' ? `✅ 当たり！ +${bet.payoutPoint - bet.betPoint}p` :
+                                          bet.status === 'lost' ? `❌ 外れ -${bet.betPoint}p` :
+                                          '⏳ 結果待ち'}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            }
+
+            // ドラフト画面
+            renderDraft() {
+                const draft = this.draftData[this.selectedDraftMatch];
+                const roleLabels = {
+                    top: 'トップ',
+                    jungle: 'ジャングル',
+                    mid: 'ミッド',
+                    bot: 'ボット',
+                    support: 'サポート'
+                };
+
+                return `
+                    <div class="header">
+                        <div class="header-content">
+                            <button class="btn btn-sm btn-secondary" onclick="system.goHome()">
+                                ← 戻る
+                            </button>
+                            <div style="font-size: 18px; font-weight: bold;">
+                                📊 フィアレスドラフト
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="draft-tabs">
+                            ${[1, 2, 3, 4, 5].map(num => `
+                                <div class="draft-tab ${this.selectedDraftMatch === num ? 'active' : ''}" 
+                                     onclick="system.selectDraftMatch(${num})">
+                                    第${num}試合
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        ${draft ? `
+                            <div class="draft-team">
+                                <div class="draft-team-header team-t1">T1</div>
+                                <div class="draft-picks">
+                                    ${draft.T1.map(pick => `
+                                        <div class="draft-role">
+                                            <div class="draft-role-label">${roleLabels[pick.role]}</div>
+                                            <div class="draft-pick-info">
+                                                <div class="draft-champion">${pick.champion}</div>
+                                                <div class="draft-player">${pick.player}</div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <div class="draft-team">
+                                <div class="draft-team-header team-kt">KT</div>
+                                <div class="draft-picks">
+                                    ${draft.KT.map(pick => `
+                                        <div class="draft-role">
+                                            <div class="draft-role-label">${roleLabels[pick.role]}</div>
+                                            <div class="draft-pick-info">
+                                                <div class="draft-champion">${pick.champion}</div>
+                                                <div class="draft-player">${pick.player}</div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : `
+                            <div class="card" style="text-align: center; color: var(--text-secondary);">
+                                第${this.selectedDraftMatch}試合のドラフト情報はまだありません
+                            </div>
+                        `}
                     </div>
                 `;
             }
@@ -1324,18 +1478,13 @@
 
             // 選択肢選択
             selectChoice(questionId, choiceValue) {
-                // 既存の選択をクリア
                 document.querySelectorAll(`[data-question="${questionId}"]`).forEach(btn => {
                     btn.classList.remove('selected');
                 });
                 
-                // 新しい選択を設定
                 document.querySelector(`[data-question="${questionId}"][data-choice="${choiceValue}"]`).classList.add('selected');
-                
-                // ベット金額セクションを表示
                 document.getElementById(`bet-amount-${questionId}`).style.display = 'block';
                 
-                // 選択を保存
                 this.tempBet = this.tempBet || {};
                 this.tempBet[questionId] = { choice: choiceValue, amount: 0 };
             }
@@ -1345,7 +1494,6 @@
                 document.getElementById(`amount-${questionId}`).value = amount;
                 this.updateAmount(questionId);
                 
-                // クイックボタンのアクティブ状態を更新
                 document.querySelectorAll(`#bet-amount-${questionId} .quick-amount-btn`).forEach(btn => {
                     btn.classList.remove('active');
                     if (parseInt(btn.textContent) === amount) {
@@ -1362,7 +1510,6 @@
                     this.tempBet[questionId].amount = amount;
                 }
                 
-                // 確定ボタンの有効/無効
                 const confirmBtn = document.getElementById(`confirm-${questionId}`);
                 if (amount > 0 && amount <= this.currentUser.currentPoint) {
                     confirmBtn.disabled = false;
@@ -1417,6 +1564,12 @@
                 }
             }
 
+            // ドラフト試合選択
+            selectDraftMatch(matchNum) {
+                this.selectedDraftMatch = matchNum;
+                this.render();
+            }
+
             // ナビゲーション
             showMatch(matchId) {
                 this.selectedMatch = matchId;
@@ -1426,6 +1579,16 @@
 
             showSeries() {
                 this.currentView = 'series';
+                this.render();
+            }
+
+            showHistory() {
+                this.currentView = 'history';
+                this.render();
+            }
+
+            showDraft() {
+                this.currentView = 'draft';
                 this.render();
             }
 
