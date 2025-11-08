@@ -1145,7 +1145,7 @@
                         id: `user-${Date.now()}`,
                         name: name,
                         email: email,
-                        currentPoint: 1000,
+                        currentPoint: 3000,
                         createdAt: new Date().toISOString()
                     };
                     this.users.push(user);
@@ -1254,6 +1254,16 @@
                                     ゲーム開始
                                 </button>
                             </form>
+                            
+                            <div style="margin-top: 24px; padding: 16px; background: #f8f8f8; border-radius: 8px; border: 1px solid #e0e0e0;">
+                                <div style="font-weight: bold; color: #333; margin-bottom: 8px;">📝 ゲームルール</div>
+                                <ul style="padding-left: 20px; color: #666; font-size: 13px; line-height: 1.8; margin: 0;">
+                                    <li>初回登録時に<strong style="color: var(--primary);">3000ポイント</strong>付与</li>
+                                    <li>各お題に最大200ポイントまで賭け可能</li>
+                                    <li>一度確定した賭けは変更不可</li>
+                                    <li>同じメールアドレスで再ログイン可能</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 `;
