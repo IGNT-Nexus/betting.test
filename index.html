@@ -12,565 +12,787 @@
         }
 
         :root {
-            --primary: #d4af37;
-            --primary-dark: #b8941f;
-            --bg-dark: #0a0e1a;
-            --bg-card: #141824;
-            --bg-card-light: #1c2333;
-            --text-primary: #ffffff;
-            --text-secondary: #94a3b8;
-            --text-dim: #64748b;
-            --success: #22c55e;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --info: #3b82f6;
-            --border: #2a3142;
+            --primary: #ff0033;
+            --primary-light: #ff3355;
+            --primary-dark: #cc0029;
+            --bg-main: #ffffff;
+            --bg-gray: #f5f5f5;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-light: #999999;
+            --success: #4caf50;
+            --danger: #f44336;
+            --warning: #ff9800;
+            --info: #2196f3;
+            --border: #e0e0e0;
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
             --t1-color: #c8aa6e;
             --kt-color: #dc143c;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #0a0e1a 0%, #141824 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-gray);
             color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
+            padding-bottom: 60px;
         }
 
         .app {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            max-width: 430px;
+            margin: 0 auto;
+            background: var(--bg-main);
         }
 
         /* ヘッダー */
         .header {
-            background: rgba(20, 24, 36, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
+            background: var(--primary);
+            color: white;
+            padding: 12px 16px;
             position: sticky;
             top: 0;
             z-index: 100;
-            padding: 12px 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .header-content {
-            max-width: 430px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo {
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .header-points {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
         }
 
-        .user-info {
+        .points-value {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* ボトムナビゲーション */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 60px;
+            z-index: 100;
+            max-width: 430px;
+            margin: 0 auto;
+        }
+
+        .nav-item {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
-        }
-
-        .user-name {
-            font-size: 11px;
-            color: var(--text-dim);
-        }
-
-        .user-points {
-            font-size: 20px;
-            font-weight: bold;
-            color: var(--primary);
-            display: flex;
             align-items: center;
-            gap: 4px;
+            justify-content: center;
+            height: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-light);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-item:active {
+            background: var(--bg-gray);
+        }
+
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 2px;
+        }
+
+        .nav-label {
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
         }
 
         /* コンテナ */
         .container {
-            max-width: 430px;
-            margin: 0 auto;
             padding: 16px;
-            flex: 1;
+            padding-bottom: 80px;
         }
 
         /* カード */
         .card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 16px;
-            border: 1px solid var(--border);
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow);
             transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
         }
 
         .card-clickable {
             cursor: pointer;
         }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16px;
+        .card-clickable:active {
+            transform: scale(0.98);
         }
 
-        .card-title {
-            font-size: 18px;
+        /* ホーム画面のメインカード */
+        .main-balance {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(255, 0, 51, 0.3);
+        }
+
+        .balance-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+
+        .balance-value {
+            font-size: 36px;
             font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .balance-info {
+            font-size: 12px;
+            opacity: 0.8;
             display: flex;
-            align-items: center;
-            gap: 8px;
+            gap: 16px;
         }
 
-        .card-subtitle {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-top: 4px;
-        }
-
-        /* ナビゲーションメニュー */
-        .nav-menu {
+        /* クイックアクション */
+        .quick-actions {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
             margin-bottom: 20px;
         }
 
-        .nav-btn {
-            padding: 16px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
+        .action-card {
+            background: white;
             border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
             cursor: pointer;
             transition: all 0.3s ease;
-            text-align: center;
         }
 
-        .nav-btn:hover {
-            background: var(--bg-card-light);
-            transform: translateY(-2px);
-            border-color: var(--primary);
+        .action-card:active {
+            transform: scale(0.95);
         }
 
-        .nav-icon {
-            font-size: 24px;
-            margin-bottom: 4px;
+        .action-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
         }
 
-        .nav-label {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        /* ステータスバッジ */
-        .status-badge {
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .status-open {
-            background: var(--success);
-            color: white;
-        }
-
-        .status-closed {
-            background: var(--warning);
-            color: white;
-        }
-
-        .status-resulted {
-            background: var(--info);
-            color: white;
-        }
-
-        .status-cancelled {
-            background: var(--danger);
-            color: white;
-        }
-
-        /* ボタン */
-        .btn {
-            padding: 12px 24px;
-            border-radius: 10px;
-            border: none;
+        .action-title {
             font-size: 14px;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: inline-flex;
+            color: var(--text-primary);
+        }
+
+        .action-subtitle {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* お知らせ */
+        .notice {
+            background: linear-gradient(to right, #fff3e0, #ffe0b2);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
+            gap: 12px;
         }
 
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        .notice-icon {
+            font-size: 20px;
         }
 
-        .btn:active:not(:disabled) {
+        .notice-text {
+            flex: 1;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* 賭け画面 */
+        .bet-tabs {
+            display: flex;
+            background: white;
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .bet-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .bet-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* 試合カード */
+        .match-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .match-card:active {
             transform: scale(0.98);
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: var(--bg-dark);
-        }
-
-        .btn-primary:hover:not(:disabled) {
-            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
-        }
-
-        .btn-secondary {
-            background: var(--bg-card-light);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover:not(:disabled) {
-            background: var(--border);
-        }
-
-        .btn-full {
-            width: 100%;
-        }
-
-        .btn-sm {
-            padding: 8px 16px;
-            font-size: 12px;
-        }
-
-        /* フォーム */
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-label {
-            display: block;
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 8px;
-            font-size: 13px;
-            color: var(--text-secondary);
         }
 
-        .form-input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            background: var(--bg-dark);
-            color: var(--text-primary);
+        .match-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .match-status {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status-open {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-closed {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .match-teams {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+        }
+
+        .team {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .team-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .team-t1 {
+            background: var(--t1-color);
+        }
+
+        .team-kt {
+            background: var(--kt-color);
+        }
+
+        .vs {
             font-size: 14px;
-            transition: all 0.2s ease;
+            color: var(--text-light);
+            font-weight: 600;
         }
 
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        .match-bets {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border);
         }
 
-        /* 選択肢グリッド */
-        .choices-grid {
+        /* お題詳細 */
+        .question-detail {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .question-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .question-info {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            padding: 12px;
+            background: var(--bg-gray);
+            border-radius: 8px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .info-label {
+            font-size: 11px;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* 選択肢 */
+        .choices {
             display: grid;
             gap: 10px;
             margin-bottom: 16px;
         }
 
-        .choices-grid-2 {
+        .choices-2 {
             grid-template-columns: repeat(2, 1fr);
         }
 
-        .choices-grid-5 {
+        .choices-5 {
             grid-template-columns: repeat(2, 1fr);
         }
 
-        .choices-grid-10 {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .choice-btn {
+        .choice {
             padding: 14px;
-            border-radius: 10px;
             border: 2px solid var(--border);
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            font-size: 14px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.2s ease;
-            text-align: center;
         }
 
-        .choice-btn:hover {
+        .choice:active {
+            transform: scale(0.95);
+        }
+
+        .choice.selected {
+            background: var(--primary);
+            color: white;
             border-color: var(--primary);
-            transform: translateY(-2px);
         }
 
-        .choice-btn.selected {
-            border-color: var(--primary);
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1));
-            color: var(--primary);
-            font-weight: bold;
+        /* ベット金額 */
+        .bet-amount {
+            padding: 16px;
+            background: var(--bg-gray);
+            border-radius: 10px;
+            margin-bottom: 16px;
         }
 
-        /* クイック金額ボタン */
+        .amount-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
         .quick-amounts {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 8px;
             margin-bottom: 12px;
         }
 
-        .quick-amount-btn {
-            flex: 1;
+        .amount-btn {
             padding: 10px;
+            border: 1px solid var(--border);
             border-radius: 8px;
-            border: 1px solid var(--border);
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            font-size: 14px;
+            background: white;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
         }
 
-        .quick-amount-btn:hover {
-            border-color: var(--primary);
+        .amount-btn:active {
+            transform: scale(0.95);
         }
 
-        .quick-amount-btn.active {
+        .amount-btn.selected {
             background: var(--primary);
-            color: var(--bg-dark);
+            color: white;
             border-color: var(--primary);
         }
 
-        /* お題カード */
-        .question-card {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
+        .amount-input {
+            width: 100%;
+            padding: 12px;
             border: 1px solid var(--border);
-            position: relative;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        /* 確定ボタン */
+        .confirm-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .question-card.bet-placed {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), var(--bg-card));
-            border-color: rgba(212, 175, 55, 0.5);
+        .confirm-btn:active {
+            transform: scale(0.98);
         }
 
-        .question-status {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: bold;
+        .confirm-btn:disabled {
+            background: var(--text-light);
+            cursor: not-allowed;
         }
 
-        .question-info {
+        /* 履歴 */
+        .history-filter {
             display: flex;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 8px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+        }
+
+        .filter-chip {
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 20px;
             font-size: 13px;
-            color: var(--text-secondary);
+            white-space: nowrap;
+            cursor: pointer;
         }
 
-        .question-info-item {
-            display: flex;
-            align-items: center;
-            gap: 4px;
+        .filter-chip.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
         }
 
-        /* 履歴アイテム */
         .history-item {
-            background: var(--bg-dark);
+            background: white;
             border-radius: 12px;
             padding: 16px;
             margin-bottom: 12px;
-            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .history-date {
+            font-size: 11px;
+            color: var(--text-light);
+        }
+
+        .history-status {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status-win {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-lose {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .status-pending {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .history-details {
+            margin-bottom: 8px;
         }
 
         .history-match {
             font-size: 12px;
-            color: var(--text-dim);
-            margin-bottom: 8px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
         }
 
         .history-question {
-            font-size: 15px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .history-bet-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
         }
 
         .history-choice {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-secondary);
         }
 
         .history-amount {
-            font-size: 14px;
-            color: var(--primary);
-        }
-
-        .history-result {
-            padding: 8px;
-            border-radius: 8px;
-            text-align: center;
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        .result-win {
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.1));
-            border: 1px solid rgba(34, 197, 94, 0.5);
-            color: var(--success);
-        }
-
-        .result-lose {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
-            border: 1px solid rgba(239, 68, 68, 0.5);
-            color: var(--danger);
-        }
-
-        .result-pending {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1));
-            border: 1px solid rgba(59, 130, 246, 0.5);
-            color: var(--info);
-        }
-
-        /* ドラフトページ */
-        .draft-tabs {
             display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-            overflow-x: auto;
-        }
-
-        .draft-tab {
-            padding: 10px 16px;
-            background: var(--bg-card-light);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.2s;
-            font-size: 14px;
-        }
-
-        .draft-tab:hover {
-            background: var(--bg-card);
-        }
-
-        .draft-tab.active {
-            background: var(--primary);
-            color: var(--bg-dark);
-            font-weight: bold;
-        }
-
-        .draft-team {
-            margin-bottom: 20px;
-        }
-
-        .draft-team-header {
-            padding: 12px;
-            border-radius: 10px 10px 0 0;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .team-t1 {
-            background: linear-gradient(135deg, var(--t1-color), rgba(200, 170, 110, 0.5));
-            color: var(--bg-dark);
-        }
-
-        .team-kt {
-            background: linear-gradient(135deg, var(--kt-color), rgba(220, 20, 60, 0.5));
-            color: white;
-        }
-
-        .draft-picks {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 0 0 10px 10px;
-            padding: 16px;
-        }
-
-        .draft-role {
-            display: grid;
-            grid-template-columns: 80px 1fr;
-            gap: 12px;
-            padding: 10px;
-            background: var(--bg-dark);
-            border-radius: 8px;
-            margin-bottom: 8px;
-        }
-
-        .draft-role-label {
-            font-size: 12px;
-            color: var(--text-dim);
-            display: flex;
+            justify-content: space-between;
             align-items: center;
-        }
-
-        .draft-pick-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .draft-champion {
-            font-weight: bold;
+            padding-top: 8px;
+            border-top: 1px solid var(--border);
             font-size: 14px;
         }
 
-        .draft-player {
-            font-size: 12px;
+        .amount-bet {
             color: var(--text-secondary);
         }
 
-        /* ステータスカード */
-        .status-card {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+        .amount-result {
+            font-weight: 600;
         }
 
-        .status-points {
-            font-size: 32px;
-            font-weight: bold;
-            color: var(--bg-dark);
+        .amount-win {
+            color: var(--success);
+        }
+
+        .amount-lose {
+            color: var(--danger);
+        }
+
+        /* ドラフト */
+        .draft-match-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+        }
+
+        .draft-match-btn {
+            padding: 10px 16px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .draft-match-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .draft-team {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .draft-team-header {
+            padding: 12px 16px;
+            font-weight: 600;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .draft-team-t1 {
+            background: var(--t1-color);
+        }
+
+        .draft-team-kt {
+            background: var(--kt-color);
+        }
+
+        .draft-picks {
+            padding: 16px;
+        }
+
+        .draft-pick {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: var(--bg-gray);
+            border-radius: 8px;
             margin-bottom: 8px;
         }
 
-        .status-info {
+        .draft-role {
+            width: 80px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .draft-champion {
+            flex: 1;
+            font-weight: 600;
+        }
+
+        .draft-player {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* ログイン画面 */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 24px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px 24px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .login-logo {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .login-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .login-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
             font-size: 14px;
-            color: rgba(0,0,0,0.7);
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .login-btn:active {
+            transform: scale(0.98);
         }
 
         /* モーダル */
@@ -581,40 +803,54 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0,0,0,0.5);
             z-index: 1000;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal.show {
-            display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
 
+        .modal.show {
+            display: flex;
+        }
+
         .modal-content {
-            background: var(--bg-card);
+            background: white;
             border-radius: 16px;
             padding: 24px;
-            max-width: 400px;
+            max-width: 360px;
             width: 100%;
-            animation: slideUp 0.3s ease;
         }
 
         .modal-header {
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 600;
             margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            text-align: center;
         }
 
         .modal-body {
-            margin-bottom: 20px;
-            color: var(--text-secondary);
-            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .modal-info {
+            padding: 16px;
+            background: var(--bg-gray);
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .modal-info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .modal-info-row:last-child {
+            margin-bottom: 0;
+            padding-top: 8px;
+            border-top: 1px solid var(--border);
+            font-weight: 600;
         }
 
         .modal-footer {
@@ -622,21 +858,47 @@
             gap: 12px;
         }
 
-        /* アニメーション */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .modal-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
         }
 
-        @keyframes slideUp {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .modal-btn-cancel {
+            background: var(--bg-gray);
+            color: var(--text-primary);
+        }
+
+        .modal-btn-confirm {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* エンプティステート */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .empty-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+
+        .empty-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        .empty-text {
+            font-size: 14px;
+            color: var(--text-light);
         }
     </style>
 </head>
@@ -646,7 +908,7 @@
     </div>
 
     <script>
-        // データストア
+        // データストアクラス
         class BettingSystem {
             constructor() {
                 this.currentUser = null;
@@ -655,17 +917,203 @@
                 this.matches = this.generateMatches();
                 this.questions = this.generateQuestions();
                 this.draftData = this.generateDraftData();
-                this.currentView = 'login';
+                this.currentTab = 'home';
+                this.currentBetTab = 'matches';
                 this.selectedMatch = null;
                 this.selectedDraftMatch = 1;
+                this.historyFilter = 'all';
                 
                 this.loadData();
                 this.init();
             }
 
-            // データの読み込み
+            // データ生成
+            generateMatches() {
+                return [
+                    { id: 'match-1', number: 1, status: 'upcoming' },
+                    { id: 'match-2', number: 2, status: 'upcoming' },
+                    { id: 'match-3', number: 3, status: 'upcoming' },
+                    { id: 'match-4', number: 4, status: 'upcoming' },
+                    { id: 'match-5', number: 5, status: 'upcoming' }
+                ];
+            }
+
+            generateQuestions() {
+                const questions = [];
+                const players = ['Doran', 'Oner', 'Faker', 'Gumayusi', 'Keria', 
+                               'PerfecT', 'Cuzz', 'Bdd', 'deokdam', 'Peter'];
+
+                this.matches.forEach(match => {
+                    questions.push(
+                        {
+                            id: `q-${match.id}-winner`,
+                            matchId: match.id,
+                            title: '試合の勝者',
+                            icon: '🏆',
+                            type: 'winner',
+                            choices: [
+                                { id: 't1', label: 'T1', value: 'T1' },
+                                { id: 'kt', label: 'KT', value: 'KT' }
+                            ],
+                            odds: 2.0,
+                            maxBet: 200,
+                            status: 'open'
+                        },
+                        {
+                            id: `q-${match.id}-mvp`,
+                            matchId: match.id,
+                            title: 'MVP予想',
+                            icon: '⭐',
+                            type: 'mvp',
+                            choices: players.map(p => ({ id: p.toLowerCase(), label: p, value: p })),
+                            odds: 4.0,
+                            maxBet: 200,
+                            status: 'open'
+                        },
+                        {
+                            id: `q-${match.id}-time`,
+                            matchId: match.id,
+                            title: '試合時間',
+                            icon: '⏱️',
+                            type: 'game_time',
+                            choices: [
+                                { id: 'under30', label: '30分以内', value: 'under30' },
+                                { id: '30-33', label: '30-33分', value: '30-33' },
+                                { id: '34-36', label: '34-36分', value: '34-36' },
+                                { id: '37-39', label: '37-39分', value: '37-39' },
+                                { id: 'over40', label: '40分以上', value: 'over40' }
+                            ],
+                            odds: 2.5,
+                            maxBet: 200,
+                            status: 'open'
+                        },
+                        {
+                            id: `q-${match.id}-fb`,
+                            matchId: match.id,
+                            title: 'ファーストブラッド',
+                            icon: '🩸',
+                            type: 'first_blood',
+                            choices: [
+                                { id: 't1', label: 'T1', value: 'T1' },
+                                { id: 'kt', label: 'KT', value: 'KT' }
+                            ],
+                            odds: 2.0,
+                            maxBet: 200,
+                            status: 'open'
+                        },
+                        {
+                            id: `q-${match.id}-ft`,
+                            matchId: match.id,
+                            title: 'ファーストタワー',
+                            icon: '🏰',
+                            type: 'first_tower',
+                            choices: [
+                                { id: 't1', label: 'T1', value: 'T1' },
+                                { id: 'kt', label: 'KT', value: 'KT' }
+                            ],
+                            odds: 2.0,
+                            maxBet: 200,
+                            status: 'open'
+                        }
+                    );
+                });
+
+                // シリーズ全体
+                questions.push(
+                    {
+                        id: 'q-series-winner',
+                        matchId: null,
+                        title: '決勝勝者',
+                        icon: '🏆',
+                        type: 'series_winner',
+                        choices: [
+                            { id: 't1', label: 'T1', value: 'T1' },
+                            { id: 'kt', label: 'KT', value: 'KT' }
+                        ],
+                        odds: 2.0,
+                        maxBet: 200,
+                        status: 'open'
+                    },
+                    {
+                        id: 'q-series-mvp',
+                        matchId: null,
+                        title: '決勝MVP',
+                        icon: '⭐',
+                        type: 'series_mvp',
+                        choices: players.map(p => ({ id: p.toLowerCase(), label: p, value: p })),
+                        odds: 6.0,
+                        maxBet: 200,
+                        status: 'open'
+                    },
+                    {
+                        id: 'q-series-baron',
+                        matchId: null,
+                        title: 'バロン総数',
+                        icon: '🐉',
+                        type: 'baron_count',
+                        choices: [
+                            { id: '1-2', label: '1-2', value: '1-2' },
+                            { id: '3', label: '3', value: '3' },
+                            { id: '4', label: '4', value: '4' },
+                            { id: '5', label: '5', value: '5' },
+                            { id: '6+', label: '6+', value: '6+' }
+                        ],
+                        odds: 3.0,
+                        maxBet: 200,
+                        status: 'open'
+                    },
+                    {
+                        id: 'q-series-elder',
+                        matchId: null,
+                        title: 'エルダー総数',
+                        icon: '🔥',
+                        type: 'elder_count',
+                        choices: [
+                            { id: '1-2', label: '1-2', value: '1-2' },
+                            { id: '3', label: '3', value: '3' },
+                            { id: '4', label: '4', value: '4' },
+                            { id: '5', label: '5', value: '5' },
+                            { id: '6+', label: '6+', value: '6+' }
+                        ],
+                        odds: 3.0,
+                        maxBet: 200,
+                        status: 'open'
+                    },
+                    {
+                        id: 'q-series-shaco',
+                        matchId: null,
+                        title: 'シャコピック',
+                        icon: '🃏',
+                        type: 'shaco_pick',
+                        choices: [
+                            { id: 'yes', label: 'Yes', value: 'yes' },
+                            { id: 'no', label: 'No', value: 'no' }
+                        ],
+                        odds: 5.0,
+                        maxBet: 200,
+                        status: 'open'
+                    }
+                );
+
+                return questions;
+            }
+
+            generateDraftData() {
+                // 初期状態は完全に空のデータ
+                const emptyData = {};
+                for (let i = 1; i <= 5; i++) {
+                    emptyData[i] = {
+                        T1: [],
+                        KT: [],
+                        status: 'waiting' // waiting, ready, completed
+                    };
+                }
+                return emptyData;
+            }
+
+            // データ管理
             loadData() {
-                const savedUser = localStorage.getItem('lol_current_user');
+                const savedUser = localStorage.getItem('lol_user');
                 if (savedUser) {
                     this.currentUser = JSON.parse(savedUser);
                 }
@@ -679,234 +1127,20 @@
                 if (savedBets) {
                     this.bets = JSON.parse(savedBets);
                 }
-                
-                const savedQuestions = localStorage.getItem('lol_questions');
-                if (savedQuestions) {
-                    this.questions = JSON.parse(savedQuestions);
-                }
             }
 
-            // データの保存
             saveData() {
                 if (this.currentUser) {
-                    localStorage.setItem('lol_current_user', JSON.stringify(this.currentUser));
+                    localStorage.setItem('lol_user', JSON.stringify(this.currentUser));
                 }
                 localStorage.setItem('lol_users', JSON.stringify(this.users));
                 localStorage.setItem('lol_bets', JSON.stringify(this.bets));
-                localStorage.setItem('lol_questions', JSON.stringify(this.questions));
             }
 
-            // 試合データ生成
-            generateMatches() {
-                return [
-                    { id: 'match-1', number: 1, status: 'upcoming' },
-                    { id: 'match-2', number: 2, status: 'upcoming' },
-                    { id: 'match-3', number: 3, status: 'upcoming' },
-                    { id: 'match-4', number: 4, status: 'upcoming' },
-                    { id: 'match-5', number: 5, status: 'upcoming' }
-                ];
-            }
-
-            // ドラフトデータ生成
-            generateDraftData() {
-                return {
-                    1: {
-                        T1: [
-                            { role: 'top', champion: 'グラガス', player: 'Doran' },
-                            { role: 'jungle', champion: 'リー・シン', player: 'Oner' },
-                            { role: 'mid', champion: 'オリアンナ', player: 'Faker' },
-                            { role: 'bot', champion: 'ジンクス', player: 'Gumayusi' },
-                            { role: 'support', champion: 'ブラウム', player: 'Keria' }
-                        ],
-                        KT: [
-                            { role: 'top', champion: 'ケネン', player: 'PerfecT' },
-                            { role: 'jungle', champion: 'ヴィエゴ', player: 'Cuzz' },
-                            { role: 'mid', champion: 'アジール', player: 'Bdd' },
-                            { role: 'bot', champion: 'カイサ', player: 'deokdam' },
-                            { role: 'support', champion: 'ノーチラス', player: 'Peter' }
-                        ]
-                    },
-                    2: {
-                        T1: [
-                            { role: 'top', champion: 'ジェイス', player: 'Doran' },
-                            { role: 'jungle', champion: 'ヘカリム', player: 'Oner' },
-                            { role: 'mid', champion: 'サイラス', player: 'Faker' },
-                            { role: 'bot', champion: 'アフェリオス', player: 'Gumayusi' },
-                            { role: 'support', champion: 'スレッシュ', player: 'Keria' }
-                        ],
-                        KT: [
-                            { role: 'top', champion: 'ガングプランク', player: 'PerfecT' },
-                            { role: 'jungle', champion: 'グレイブス', player: 'Cuzz' },
-                            { role: 'mid', champion: 'ゾーイ', player: 'Bdd' },
-                            { role: 'bot', champion: 'トリスターナ', player: 'deokdam' },
-                            { role: 'support', champion: 'レオナ', player: 'Peter' }
-                        ]
-                    }
-                };
-            }
-
-            // お題データ生成
-            generateQuestions() {
-                const questions = [];
-                const players = ['Doran', 'Oner', 'Faker', 'Gumayusi', 'Keria', 
-                               'PerfecT', 'Cuzz', 'Bdd', 'deokdam', 'Peter'];
-
-                // 各試合のお題
-                this.matches.forEach(match => {
-                    questions.push({
-                        id: `q-${match.id}-winner`,
-                        matchId: match.id,
-                        title: '🏆 試合の勝者を予想',
-                        type: 'winner',
-                        choices: [
-                            { id: 't1', label: 'T1', value: 'T1' },
-                            { id: 'kt', label: 'KT', value: 'KT' }
-                        ],
-                        odds: 2.0,
-                        maxBet: 200,
-                        status: 'open'
-                    });
-
-                    questions.push({
-                        id: `q-${match.id}-mvp`,
-                        matchId: match.id,
-                        title: '⭐ 試合のMVPを予想',
-                        type: 'mvp',
-                        choices: players.map(p => ({ id: p.toLowerCase(), label: p, value: p })),
-                        odds: 4.0,
-                        maxBet: 200,
-                        status: 'open'
-                    });
-
-                    questions.push({
-                        id: `q-${match.id}-time`,
-                        matchId: match.id,
-                        title: '⏱️ 試合時間を予想',
-                        type: 'game_time',
-                        choices: [
-                            { id: 'under30', label: '30分以内', value: 'under30' },
-                            { id: '30-33', label: '30～33分59秒', value: '30-33' },
-                            { id: '34-36', label: '34～36分59秒', value: '34-36' },
-                            { id: '37-39', label: '37～39分59秒', value: '37-39' },
-                            { id: 'over40', label: '40分以降', value: 'over40' }
-                        ],
-                        odds: 2.5,
-                        maxBet: 200,
-                        status: 'open'
-                    });
-
-                    questions.push({
-                        id: `q-${match.id}-fb`,
-                        matchId: match.id,
-                        title: '🩸 ファーストブラッド',
-                        type: 'first_blood',
-                        choices: [
-                            { id: 't1', label: 'T1', value: 'T1' },
-                            { id: 'kt', label: 'KT', value: 'KT' }
-                        ],
-                        odds: 2.0,
-                        maxBet: 200,
-                        status: 'open'
-                    });
-
-                    questions.push({
-                        id: `q-${match.id}-ft`,
-                        matchId: match.id,
-                        title: '🏰 ファーストタワー',
-                        type: 'first_tower',
-                        choices: [
-                            { id: 't1', label: 'T1', value: 'T1' },
-                            { id: 'kt', label: 'KT', value: 'KT' }
-                        ],
-                        odds: 2.0,
-                        maxBet: 200,
-                        status: 'open'
-                    });
-                });
-
-                // シリーズ全体のお題
-                questions.push({
-                    id: 'q-series-winner',
-                    matchId: null,
-                    title: '🏆 決勝の勝者を予想',
-                    type: 'series_winner',
-                    choices: [
-                        { id: 't1', label: 'T1', value: 'T1' },
-                        { id: 'kt', label: 'KT', value: 'KT' }
-                    ],
-                    odds: 2.0,
-                    maxBet: 200,
-                    status: 'open'
-                });
-
-                questions.push({
-                    id: 'q-series-mvp',
-                    matchId: null,
-                    title: '⭐ 決勝MVPを予想',
-                    type: 'series_mvp',
-                    choices: players.map(p => ({ id: p.toLowerCase(), label: p, value: p })),
-                    odds: 6.0,
-                    maxBet: 200,
-                    status: 'open'
-                });
-
-                questions.push({
-                    id: 'q-series-baron',
-                    matchId: null,
-                    title: '🐉 バロン総撃破数',
-                    type: 'baron_count',
-                    choices: [
-                        { id: '1-2', label: '1～2', value: '1-2' },
-                        { id: '3', label: '3', value: '3' },
-                        { id: '4', label: '4', value: '4' },
-                        { id: '5', label: '5', value: '5' },
-                        { id: '6+', label: '6～', value: '6+' }
-                    ],
-                    odds: 3.0,
-                    maxBet: 200,
-                    status: 'open'
-                });
-
-                questions.push({
-                    id: 'q-series-elder',
-                    matchId: null,
-                    title: '🔥 エルダー総撃破数',
-                    type: 'elder_count',
-                    choices: [
-                        { id: '1-2', label: '1～2', value: '1-2' },
-                        { id: '3', label: '3', value: '3' },
-                        { id: '4', label: '4', value: '4' },
-                        { id: '5', label: '5', value: '5' },
-                        { id: '6+', label: '6～', value: '6+' }
-                    ],
-                    odds: 3.0,
-                    maxBet: 200,
-                    status: 'open'
-                });
-
-                questions.push({
-                    id: 'q-series-shaco',
-                    matchId: null,
-                    title: '🃏 シャコがピックされるか',
-                    type: 'shaco_pick',
-                    choices: [
-                        { id: 'yes', label: 'Yes', value: 'yes' },
-                        { id: 'no', label: 'No', value: 'no' }
-                    ],
-                    odds: 5.0,
-                    maxBet: 200,
-                    status: 'open'
-                });
-
-                return questions;
-            }
-
-            // ユーザー登録/ログイン
             login(name, email) {
                 let user = this.users.find(u => u.email === email);
                 
                 if (!user) {
-                    // 新規ユーザー作成
                     user = {
                         id: `user-${Date.now()}`,
                         name: name,
@@ -922,17 +1156,22 @@
                 return user;
             }
 
-            // ログアウト
             logout() {
                 this.currentUser = null;
-                localStorage.removeItem('lol_current_user');
-                this.currentView = 'login';
-                this.render();
+                localStorage.removeItem('lol_user');
+                this.init();
             }
 
-            // ベット作成
             placeBet(questionId, choice, amount) {
                 if (!this.currentUser || amount > this.currentUser.currentPoint) {
+                    return false;
+                }
+
+                const existingBet = this.bets.find(b => 
+                    b.userId === this.currentUser.id && b.questionId === questionId
+                );
+                
+                if (existingBet) {
                     return false;
                 }
 
@@ -953,54 +1192,54 @@
                 return true;
             }
 
-            // ユーザーのベット取得
             getUserBets() {
                 if (!this.currentUser) return [];
                 return this.bets.filter(b => b.userId === this.currentUser.id);
             }
 
-            // 初期化
+            // UI管理
             init() {
-                if (this.currentUser) {
-                    this.currentView = 'home';
+                if (!this.currentUser) {
+                    this.renderLogin();
+                } else {
+                    this.render();
                 }
-                this.render();
             }
 
-            // レンダリング
             render() {
                 const app = document.getElementById('app');
-                
-                if (this.currentView === 'login') {
-                    app.innerHTML = this.renderLogin();
-                } else if (this.currentView === 'home') {
-                    app.innerHTML = this.renderHome();
-                } else if (this.currentView === 'match') {
-                    app.innerHTML = this.renderMatch();
-                } else if (this.currentView === 'series') {
-                    app.innerHTML = this.renderSeries();
-                } else if (this.currentView === 'history') {
-                    app.innerHTML = this.renderHistory();
-                } else if (this.currentView === 'draft') {
-                    app.innerHTML = this.renderDraft();
+                let content = '';
+
+                // ヘッダー
+                content += this.renderHeader();
+
+                // コンテンツ
+                if (this.currentTab === 'home') {
+                    content += this.renderHome();
+                } else if (this.currentTab === 'bet') {
+                    content += this.renderBet();
+                } else if (this.currentTab === 'history') {
+                    content += this.renderHistory();
+                } else if (this.currentTab === 'draft') {
+                    content += this.renderDraft();
                 }
-                
-                this.attachEventListeners();
+
+                // ボトムナビゲーション
+                content += this.renderBottomNav();
+
+                app.innerHTML = content;
             }
 
-            // ログイン画面
             renderLogin() {
-                return `
-                    <div class="container" style="padding-top: 40px;">
-                        <div class="card" style="max-width: 400px; margin: 0 auto;">
-                            <h1 class="card-title" style="font-size: 24px; text-align: center; margin-bottom: 8px;">
-                                🎮 LoL World Finals 2025
-                            </h1>
-                            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 24px;">
-                                T1 vs KT - Betting System
-                            </p>
+                const app = document.getElementById('app');
+                app.innerHTML = `
+                    <div class="login-container">
+                        <div class="login-card">
+                            <div class="login-logo">🎮</div>
+                            <h1 class="login-title">LoL Finals 2025</h1>
+                            <p class="login-subtitle">T1 vs KT ベッティング</p>
                             
-                            <form id="loginForm">
+                            <form id="loginForm" onsubmit="return false;">
                                 <div class="form-group">
                                     <label class="form-label">ニックネーム</label>
                                     <input type="text" class="form-input" id="userName" required>
@@ -1009,124 +1248,123 @@
                                 <div class="form-group">
                                     <label class="form-label">メールアドレス</label>
                                     <input type="email" class="form-input" id="userEmail" required>
-                                    <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">
-                                        ※ 同じメールアドレスで再ログインできます
-                                    </div>
                                 </div>
                                 
-                                <button type="submit" class="btn btn-primary btn-full">
+                                <button type="submit" class="login-btn" onclick="system.handleLogin()">
                                     ゲーム開始
                                 </button>
                             </form>
-                            
-                            <div style="margin-top: 24px; padding: 16px; background: var(--bg-dark); border-radius: 10px;">
-                                <div style="font-weight: bold; margin-bottom: 8px;">📝 ルール</div>
-                                <ul style="padding-left: 20px; color: var(--text-secondary); font-size: 13px; line-height: 1.8;">
-                                    <li>初回登録時に1000ポイント付与</li>
-                                    <li>各お題に最大200ポイントまで</li>
-                                    <li>一度確定した賭けは変更不可</li>
-                                </ul>
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderHeader() {
+                const titles = {
+                    home: 'ホーム',
+                    bet: '賭ける',
+                    history: '履歴',
+                    draft: 'ドラフト'
+                };
+
+                return `
+                    <div class="header">
+                        <div class="header-content">
+                            <div class="header-title">${titles[this.currentTab]}</div>
+                            <div class="header-points">
+                                <span>💰</span>
+                                <span class="points-value">${this.currentUser.currentPoint}p</span>
                             </div>
                         </div>
                     </div>
                 `;
             }
 
-            // ホーム画面
-            renderHome() {
-                const userBets = this.getUserBets();
-                const totalProfit = userBets.reduce((sum, bet) => {
-                    if (bet.status === 'won') return sum + (bet.payoutPoint - bet.betPoint);
-                    if (bet.status === 'lost') return sum - bet.betPoint;
-                    return sum;
-                }, 0);
-
+            renderBottomNav() {
                 return `
-                    <div class="header">
-                        <div class="header-content">
-                            <div class="logo">
-                                🎮 LoL Finals
-                            </div>
-                            <div class="user-info">
-                                <div class="user-name">${this.currentUser.name}</div>
-                                <div class="user-points">
-                                    <span>💰</span>
-                                    <span>${this.currentUser.currentPoint}p</span>
-                                </div>
-                            </div>
+                    <div class="bottom-nav">
+                        <div class="nav-item ${this.currentTab === 'home' ? 'active' : ''}" onclick="system.switchTab('home')">
+                            <div class="nav-icon">🏠</div>
+                            <div class="nav-label">ホーム</div>
+                        </div>
+                        <div class="nav-item ${this.currentTab === 'bet' ? 'active' : ''}" onclick="system.switchTab('bet')">
+                            <div class="nav-icon">🎯</div>
+                            <div class="nav-label">賭ける</div>
+                        </div>
+                        <div class="nav-item ${this.currentTab === 'history' ? 'active' : ''}" onclick="system.switchTab('history')">
+                            <div class="nav-icon">📋</div>
+                            <div class="nav-label">履歴</div>
+                        </div>
+                        <div class="nav-item ${this.currentTab === 'draft' ? 'active' : ''}" onclick="system.switchTab('draft')">
+                            <div class="nav-icon">📊</div>
+                            <div class="nav-label">ドラフト</div>
                         </div>
                     </div>
+                `;
+            }
 
+            renderHome() {
+                const userBets = this.getUserBets();
+                const totalBets = userBets.length;
+                const pendingBets = userBets.filter(b => b.status === 'pending').length;
+
+                return `
                     <div class="container">
-                        <div class="status-card">
-                            <div class="status-points">${this.currentUser.currentPoint} POINTS</div>
-                            <div class="status-info">
-                                ベット数: ${userBets.length} | 
-                                総利益: ${totalProfit >= 0 ? '+' : ''}${totalProfit}p
+                        <div class="main-balance">
+                            <div class="balance-label">現在のポイント</div>
+                            <div class="balance-value">${this.currentUser.currentPoint}p</div>
+                            <div class="balance-info">
+                                <span>ベット数: ${totalBets}</span>
+                                <span>進行中: ${pendingBets}</span>
                             </div>
                         </div>
 
-                        <div class="nav-menu">
-                            <div class="nav-btn" onclick="system.showHistory()">
-                                <div class="nav-icon">📋</div>
-                                <div class="nav-label">ベット履歴</div>
-                            </div>
-                            <div class="nav-btn" onclick="system.showDraft()">
-                                <div class="nav-icon">📊</div>
-                                <div class="nav-label">ドラフト</div>
+                        <div class="notice">
+                            <div class="notice-icon">📢</div>
+                            <div class="notice-text">
+                                第1試合開始でシリーズ全体のベットが締め切られます
                             </div>
                         </div>
 
-                        <h2 style="font-size: 16px; margin-bottom: 12px; color: var(--text-secondary);">📅 試合一覧</h2>
-                        ${this.matches.map(match => {
-                            const matchBets = userBets.filter(b => {
-                                const q = this.questions.find(q => q.id === b.questionId);
-                                return q && q.matchId === match.id;
-                            }).length;
+                        <div class="quick-actions">
+                            <div class="action-card" onclick="system.switchTab('bet')">
+                                <div class="action-icon">🎯</div>
+                                <div class="action-title">試合に賭ける</div>
+                                <div class="action-subtitle">5試合 × 5問</div>
+                            </div>
+                            <div class="action-card" onclick="system.switchTab('bet'); system.currentBetTab='series'; system.render();">
+                                <div class="action-icon">🏆</div>
+                                <div class="action-title">シリーズ予想</div>
+                                <div class="action-subtitle">全体予想 5問</div>
+                            </div>
+                        </div>
 
+                        <h3 style="margin-bottom: 12px;">最近のベット</h3>
+                        ${userBets.slice(0, 3).map(bet => {
+                            const question = this.questions.find(q => q.id === bet.questionId);
+                            const match = question.matchId ? 
+                                this.matches.find(m => m.id === question.matchId) : null;
+                            
                             return `
-                                <div class="card card-clickable" onclick="system.showMatch('${match.id}')">
-                                    <div class="card-header">
+                                <div class="card">
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                                         <div>
-                                            <div class="card-title">第${match.number}試合</div>
-                                            <div class="card-subtitle">T1 vs KT</div>
-                                            ${matchBets > 0 ? `
-                                                <div style="font-size: 12px; color: var(--primary); margin-top: 4px;">
-                                                    ${matchBets}個のベット済み
-                                                </div>
-                                            ` : ''}
+                                            <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 4px;">
+                                                ${match ? `第${match.number}試合` : 'シリーズ全体'}
+                                            </div>
+                                            <div style="font-weight: 500;">${question.icon} ${question.title}</div>
+                                            <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
+                                                選択: ${bet.choice} (${bet.betPoint}p)
+                                            </div>
                                         </div>
-                                        <span class="status-badge status-${match.status === 'upcoming' ? 'open' : 'closed'}">
-                                            ${match.status === 'upcoming' ? '受付中' : '締切'}
-                                        </span>
+                                        <span class="history-status status-pending">進行中</span>
                                     </div>
                                 </div>
                             `;
-                        }).join('')}
-
-                        <div class="card card-clickable" onclick="system.showSeries()">
-                            <div class="card-header">
-                                <div>
-                                    <div class="card-title">🏆 シリーズ全体</div>
-                                    <div class="card-subtitle">決勝全体の予想（5問）</div>
-                                    ${userBets.filter(b => {
-                                        const q = this.questions.find(q => q.id === b.questionId);
-                                        return q && !q.matchId;
-                                    }).length > 0 ? `
-                                        <div style="font-size: 12px; color: var(--primary); margin-top: 4px;">
-                                            ${userBets.filter(b => {
-                                                const q = this.questions.find(q => q.id === b.questionId);
-                                                return q && !q.matchId;
-                                            }).length}個のベット済み
-                                        </div>
-                                    ` : ''}
-                                </div>
-                                <span class="status-badge status-open">受付中</span>
-                            </div>
-                        </div>
+                        }).join('') || '<div class="empty-state"><div class="empty-icon">📝</div><div class="empty-text">まだベットがありません</div></div>'}
 
                         <div style="margin-top: 32px;">
-                            <button class="btn btn-secondary btn-full" onclick="system.logout()">
+                            <button class="confirm-btn" style="background: var(--text-light);" onclick="system.logout()">
                                 ログアウト
                             </button>
                         </div>
@@ -1134,53 +1372,234 @@
                 `;
             }
 
-            // 履歴画面
-            renderHistory() {
-                const userBets = this.getUserBets();
-
-                return `
-                    <div class="header">
-                        <div class="header-content">
-                            <button class="btn btn-sm btn-secondary" onclick="system.goHome()">
-                                ← 戻る
-                            </button>
-                            <div class="user-info">
-                                <div class="user-points">
-                                    <span>💰</span>
-                                    <span>${this.currentUser.currentPoint}p</span>
-                                </div>
+            renderBet() {
+                let content = `
+                    <div class="container">
+                        <div class="bet-tabs">
+                            <div class="bet-tab ${this.currentBetTab === 'matches' ? 'active' : ''}" 
+                                 onclick="system.currentBetTab='matches'; system.render();">
+                                試合別
+                            </div>
+                            <div class="bet-tab ${this.currentBetTab === 'series' ? 'active' : ''}"
+                                 onclick="system.currentBetTab='series'; system.render();">
+                                シリーズ全体
                             </div>
                         </div>
-                    </div>
+                `;
 
-                    <div class="container">
-                        <h2 style="font-size: 20px; margin-bottom: 20px;">📋 ベット履歴</h2>
+                if (this.selectedMatch) {
+                    content += this.renderMatchQuestions();
+                } else if (this.currentBetTab === 'matches') {
+                    content += this.renderMatchList();
+                } else {
+                    content += this.renderSeriesQuestions();
+                }
 
-                        ${userBets.length === 0 ? `
-                            <div class="card" style="text-align: center; color: var(--text-secondary);">
-                                まだベットがありません
+                content += '</div>';
+                return content;
+            }
+
+            renderMatchList() {
+                const userBets = this.getUserBets();
+                
+                return this.matches.map(match => {
+                    const matchBets = userBets.filter(b => {
+                        const q = this.questions.find(q => q.id === b.questionId);
+                        return q && q.matchId === match.id;
+                    });
+
+                    return `
+                        <div class="match-card" onclick="system.selectedMatch='${match.id}'; system.render();">
+                            <div class="match-header">
+                                <div class="match-title">第${match.number}試合</div>
+                                <div class="match-status status-${match.status === 'upcoming' ? 'open' : 'closed'}">
+                                    ${match.status === 'upcoming' ? '受付中' : '締切'}
+                                </div>
                             </div>
-                        ` : userBets.map(bet => {
+                            <div class="match-teams">
+                                <div class="team">
+                                    <div class="team-logo team-t1">T1</div>
+                                    <span>T1</span>
+                                </div>
+                                <div class="vs">VS</div>
+                                <div class="team">
+                                    <div class="team-logo team-kt">KT</div>
+                                    <span>KT</span>
+                                </div>
+                            </div>
+                            ${matchBets.length > 0 ? `
+                                <div class="match-bets">
+                                    ${matchBets.length}個のベット済み
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            renderMatchQuestions() {
+                const match = this.matches.find(m => m.id === this.selectedMatch);
+                const questions = this.questions.filter(q => q.matchId === match.id);
+                const userBets = this.getUserBets();
+
+                let content = `
+                    <div style="margin-bottom: 16px;">
+                        <button onclick="system.selectedMatch=null; system.render();" 
+                                style="padding: 8px 16px; background: var(--bg-gray); border: none; border-radius: 8px; cursor: pointer;">
+                            ← 戻る
+                        </button>
+                    </div>
+                    
+                    <h3 style="margin-bottom: 16px;">第${match.number}試合のお題</h3>
+                `;
+
+                questions.forEach(question => {
+                    const bet = userBets.find(b => b.questionId === question.id);
+                    
+                    content += `
+                        <div class="card" onclick="${!bet ? `system.showQuestionDetail('${question.id}')` : ''}">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-size: 18px; margin-bottom: 4px;">
+                                        ${question.icon}
+                                    </div>
+                                    <div style="font-weight: 500;">
+                                        ${question.title}
+                                    </div>
+                                    <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">
+                                        倍率: ${question.odds}倍 | 上限: ${question.maxBet}p
+                                    </div>
+                                    ${bet ? `
+                                        <div style="font-size: 13px; color: var(--primary); margin-top: 4px;">
+                                            ベット済: ${bet.choice} (${bet.betPoint}p)
+                                        </div>
+                                    ` : ''}
+                                </div>
+                                ${!bet ? '<div style="color: var(--text-light);">→</div>' : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                return content;
+            }
+
+            renderSeriesQuestions() {
+                const questions = this.questions.filter(q => !q.matchId);
+                const userBets = this.getUserBets();
+
+                let content = '<h3 style="margin-bottom: 16px;">シリーズ全体のお題</h3>';
+
+                questions.forEach(question => {
+                    const bet = userBets.find(b => b.questionId === question.id);
+                    
+                    content += `
+                        <div class="card" onclick="${!bet ? `system.showQuestionDetail('${question.id}')` : ''}">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-size: 18px; margin-bottom: 4px;">
+                                        ${question.icon}
+                                    </div>
+                                    <div style="font-weight: 500;">
+                                        ${question.title}
+                                    </div>
+                                    <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">
+                                        倍率: ${question.odds}倍 | 上限: ${question.maxBet}p
+                                    </div>
+                                    ${bet ? `
+                                        <div style="font-size: 13px; color: var(--primary); margin-top: 4px;">
+                                            ベット済: ${bet.choice} (${bet.betPoint}p)
+                                        </div>
+                                    ` : ''}
+                                </div>
+                                ${!bet ? '<div style="color: var(--text-light);">→</div>' : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                return content;
+            }
+
+            renderHistory() {
+                const userBets = this.getUserBets();
+                let filteredBets = userBets;
+
+                if (this.historyFilter === 'win') {
+                    filteredBets = userBets.filter(b => b.status === 'won');
+                } else if (this.historyFilter === 'lose') {
+                    filteredBets = userBets.filter(b => b.status === 'lost');
+                } else if (this.historyFilter === 'pending') {
+                    filteredBets = userBets.filter(b => b.status === 'pending');
+                }
+
+                return `
+                    <div class="container">
+                        <div class="history-filter">
+                            <div class="filter-chip ${this.historyFilter === 'all' ? 'active' : ''}"
+                                 onclick="system.historyFilter='all'; system.render();">
+                                すべて
+                            </div>
+                            <div class="filter-chip ${this.historyFilter === 'pending' ? 'active' : ''}"
+                                 onclick="system.historyFilter='pending'; system.render();">
+                                進行中
+                            </div>
+                            <div class="filter-chip ${this.historyFilter === 'win' ? 'active' : ''}"
+                                 onclick="system.historyFilter='win'; system.render();">
+                                当たり
+                            </div>
+                            <div class="filter-chip ${this.historyFilter === 'lose' ? 'active' : ''}"
+                                 onclick="system.historyFilter='lose'; system.render();">
+                                外れ
+                            </div>
+                        </div>
+
+                        ${filteredBets.length === 0 ? `
+                            <div class="empty-state">
+                                <div class="empty-icon">📋</div>
+                                <div class="empty-title">履歴がありません</div>
+                                <div class="empty-text">ベットを開始しましょう</div>
+                            </div>
+                        ` : filteredBets.map(bet => {
                             const question = this.questions.find(q => q.id === bet.questionId);
                             const match = question.matchId ? 
                                 this.matches.find(m => m.id === question.matchId) : null;
+                            const date = new Date(bet.createdAt);
+                            const dateStr = `${date.getMonth()+1}/${date.getDate()} ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
 
                             return `
                                 <div class="history-item">
-                                    <div class="history-match">
-                                        ${match ? `第${match.number}試合` : 'シリーズ全体'}
+                                    <div class="history-header">
+                                        <div>
+                                            <div class="history-date">${dateStr}</div>
+                                            <div class="history-match">
+                                                ${match ? `第${match.number}試合` : 'シリーズ全体'}
+                                            </div>
+                                        </div>
+                                        <div class="history-status status-${bet.status === 'won' ? 'win' : 
+                                                                           bet.status === 'lost' ? 'lose' : 
+                                                                           'pending'}">
+                                            ${bet.status === 'won' ? '当たり' :
+                                              bet.status === 'lost' ? '外れ' :
+                                              '進行中'}
+                                        </div>
                                     </div>
-                                    <div class="history-question">${question.title}</div>
-                                    <div class="history-bet-info">
-                                        <div class="history-choice">選択: ${bet.choice}</div>
-                                        <div class="history-amount">${bet.betPoint}p</div>
+                                    <div class="history-details">
+                                        <div class="history-question">
+                                            ${question.icon} ${question.title}
+                                        </div>
+                                        <div class="history-choice">
+                                            選択: ${bet.choice}
+                                        </div>
                                     </div>
-                                    <div class="history-result result-${bet.status === 'won' ? 'win' : 
-                                                                       bet.status === 'lost' ? 'lose' : 
-                                                                       'pending'}">
-                                        ${bet.status === 'won' ? `✅ 当たり！ +${bet.payoutPoint - bet.betPoint}p` :
-                                          bet.status === 'lost' ? `❌ 外れ -${bet.betPoint}p` :
-                                          '⏳ 結果待ち'}
+                                    <div class="history-amount">
+                                        <div class="amount-bet">ベット: ${bet.betPoint}p</div>
+                                        <div class="amount-result ${bet.status === 'won' ? 'amount-win' : 
+                                                                   bet.status === 'lost' ? 'amount-lose' : ''}">
+                                            ${bet.status === 'won' ? `+${bet.payoutPoint - bet.betPoint}p` :
+                                              bet.status === 'lost' ? `-${bet.betPoint}p` :
+                                              `予想: ${Math.floor(bet.betPoint * question.odds)}p`}
+                                        </div>
                                     </div>
                                 </div>
                             `;
@@ -1189,412 +1608,207 @@
                 `;
             }
 
-            // ドラフト画面
             renderDraft() {
-                const draft = this.draftData[this.selectedDraftMatch];
                 const roleLabels = {
-                    top: 'トップ',
-                    jungle: 'ジャングル',
-                    mid: 'ミッド',
-                    bot: 'ボット',
-                    support: 'サポート'
+                    top: 'TOP',
+                    jungle: 'JG',
+                    mid: 'MID',
+                    bot: 'BOT',
+                    support: 'SUP'
                 };
 
                 return `
-                    <div class="header">
-                        <div class="header-content">
-                            <button class="btn btn-sm btn-secondary" onclick="system.goHome()">
-                                ← 戻る
-                            </button>
-                            <div style="font-size: 18px; font-weight: bold;">
-                                📊 フィアレスドラフト
+                    <div class="container">
+                        <div class="draft-match-selector">
+                            ${[1, 2, 3, 4, 5].map(num => {
+                                const matchData = this.draftData[num];
+                                const hasData = matchData && matchData.T1.length > 0;
+                                
+                                return `
+                                    <div class="draft-match-btn ${this.selectedDraftMatch === num ? 'active' : ''}"
+                                         onclick="system.selectedDraftMatch=${num}; system.render();"
+                                         style="${hasData ? 'border-color: var(--success);' : ''}">
+                                        第${num}試合
+                                        ${hasData ? '✓' : ''}
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+
+                        <div class="empty-state">
+                            <div class="empty-icon">⏳</div>
+                            <div class="empty-title">第${this.selectedDraftMatch}試合</div>
+                            <div class="empty-text">
+                                ドラフト情報は試合終了後に公開されます
+                            </div>
+                            <div style="margin-top: 20px; padding: 15px; background: rgba(255, 152, 0, 0.1); border-radius: 8px; border: 1px solid rgba(255, 152, 0, 0.3);">
+                                <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+                                    <strong style="color: var(--warning);">📢 お知らせ</strong><br>
+                                    • ドラフト情報は各試合の終了後に更新されます<br>
+                                    • ピック&バンの結果を確認できます<br>
+                                    • 過去の試合記録として閲覧可能です
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="container">
-                        <div class="draft-tabs">
-                            ${[1, 2, 3, 4, 5].map(num => `
-                                <div class="draft-tab ${this.selectedDraftMatch === num ? 'active' : ''}" 
-                                     onclick="system.selectDraftMatch(${num})">
-                                    第${num}試合
-                                </div>
-                            `).join('')}
-                        </div>
-
-                        ${draft ? `
-                            <div class="draft-team">
-                                <div class="draft-team-header team-t1">T1</div>
-                                <div class="draft-picks">
-                                    ${draft.T1.map(pick => `
-                                        <div class="draft-role">
-                                            <div class="draft-role-label">${roleLabels[pick.role]}</div>
-                                            <div class="draft-pick-info">
-                                                <div class="draft-champion">${pick.champion}</div>
-                                                <div class="draft-player">${pick.player}</div>
-                                            </div>
+                        <div style="margin-top: 20px;">
+                            <div style="background: white; border-radius: 12px; padding: 16px; box-shadow: var(--shadow);">
+                                <h4 style="margin-bottom: 12px; color: var(--text-primary);">📊 ドラフト概要</h4>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                    <div>
+                                        <div style="font-weight: 600; color: var(--t1-color); margin-bottom: 8px;">T1 ロスター</div>
+                                        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">
+                                            • TOP: Doran<br>
+                                            • JG: Oner<br>
+                                            • MID: Faker<br>
+                                            • BOT: Gumayusi<br>
+                                            • SUP: Keria
                                         </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-
-                            <div class="draft-team">
-                                <div class="draft-team-header team-kt">KT</div>
-                                <div class="draft-picks">
-                                    ${draft.KT.map(pick => `
-                                        <div class="draft-role">
-                                            <div class="draft-role-label">${roleLabels[pick.role]}</div>
-                                            <div class="draft-pick-info">
-                                                <div class="draft-champion">${pick.champion}</div>
-                                                <div class="draft-player">${pick.player}</div>
-                                            </div>
+                                    </div>
+                                    <div>
+                                        <div style="font-weight: 600; color: var(--kt-color); margin-bottom: 8px;">KT ロスター</div>
+                                        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">
+                                            • TOP: PerfecT<br>
+                                            • JG: Cuzz<br>
+                                            • MID: Bdd<br>
+                                            • BOT: deokdam<br>
+                                            • SUP: Peter
                                         </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-                        ` : `
-                            <div class="card" style="text-align: center; color: var(--text-secondary);">
-                                第${this.selectedDraftMatch}試合のドラフト情報はまだありません
-                            </div>
-                        `}
-                    </div>
-                `;
-            }
-
-            // 試合詳細画面
-            renderMatch() {
-                const match = this.matches.find(m => m.id === this.selectedMatch);
-                const matchQuestions = this.questions.filter(q => q.matchId === match.id);
-                const userBets = this.getUserBets();
-
-                return `
-                    <div class="header">
-                        <div class="header-content">
-                            <button class="btn btn-sm btn-secondary" onclick="system.goHome()">
-                                ← 戻る
-                            </button>
-                            <div class="user-info">
-                                <div class="user-points">
-                                    <span>💰</span>
-                                    <span>${this.currentUser.currentPoint}p</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="container">
-                        <div class="card" style="background: linear-gradient(135deg, var(--t1-color), var(--kt-color));">
-                            <h2 style="font-size: 20px; text-align: center; color: white;">
-                                第${match.number}試合
-                            </h2>
-                            <div style="text-align: center; color: white; opacity: 0.9;">T1 vs KT</div>
-                        </div>
-
-                        ${matchQuestions.map(question => {
-                            const bet = userBets.find(b => b.questionId === question.id);
-                            return this.renderQuestionCard(question, bet);
-                        }).join('')}
-                    </div>
-
-                    <div class="modal" id="betModal">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                ⚠️ ベット内容の確認
-                            </div>
-                            <div class="modal-body" id="betConfirmContent">
-                                <!-- 動的に生成 -->
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" onclick="system.closeBetModal()" style="flex: 1;">
-                                    キャンセル
-                                </button>
-                                <button class="btn btn-primary" onclick="system.confirmBet()" style="flex: 1;">
-                                    確定
-                                </button>
+                        <div style="margin-top: 16px;">
+                            <div style="background: var(--bg-gray); border-radius: 8px; padding: 12px;">
+                                <div style="text-align: center; font-size: 12px; color: var(--text-light);">
+                                    フィアレスドラフトルール: 一度ピックされたチャンピオンは<br>
+                                    そのシリーズ中は使用できません
+                                </div>
                             </div>
                         </div>
                     </div>
                 `;
             }
 
-            // シリーズ全体画面
-            renderSeries() {
-                const seriesQuestions = this.questions.filter(q => !q.matchId);
-                const userBets = this.getUserBets();
-
-                return `
-                    <div class="header">
-                        <div class="header-content">
-                            <button class="btn btn-sm btn-secondary" onclick="system.goHome()">
-                                ← 戻る
-                            </button>
-                            <div class="user-info">
-                                <div class="user-points">
-                                    <span>💰</span>
-                                    <span>${this.currentUser.currentPoint}p</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="container">
-                        <div class="card" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark));">
-                            <h2 style="font-size: 20px; text-align: center; color: var(--bg-dark);">
-                                🏆 シリーズ全体のお題
-                            </h2>
-                            <div style="text-align: center; color: var(--bg-dark); opacity: 0.8; font-size: 14px;">
-                                第1試合開始と同時に締め切られます
-                            </div>
-                        </div>
-
-                        ${seriesQuestions.map(question => {
-                            const bet = userBets.find(b => b.questionId === question.id);
-                            return this.renderQuestionCard(question, bet);
-                        }).join('')}
-                    </div>
-
-                    <div class="modal" id="betModal">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                ⚠️ ベット内容の確認
-                            </div>
-                            <div class="modal-body" id="betConfirmContent">
-                                <!-- 動的に生成 -->
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" onclick="system.closeBetModal()" style="flex: 1;">
-                                    キャンセル
-                                </button>
-                                <button class="btn btn-primary" onclick="system.confirmBet()" style="flex: 1;">
-                                    確定
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            // お題カード
-            renderQuestionCard(question, bet) {
-                if (bet) {
-                    return `
-                        <div class="question-card bet-placed">
-                            <div class="question-status status-closed">ベット済</div>
-                            <h3 style="font-size: 16px; margin-bottom: 12px;">${question.title}</h3>
-                            <div style="padding: 12px; background: var(--bg-dark); border-radius: 8px;">
-                                <div style="font-size: 14px; margin-bottom: 4px;">
-                                    選択: <strong style="color: var(--primary);">${bet.choice}</strong>
-                                </div>
-                                <div style="font-size: 14px;">
-                                    ベット: <strong>${bet.betPoint}p</strong> → 
-                                    予想払戻: <strong>${Math.floor(bet.betPoint * question.odds)}p</strong>
-                                </div>
-                            </div>
-                        </div>
-                    `;
+            // イベントハンドラ
+            handleLogin() {
+                const name = document.getElementById('userName').value;
+                const email = document.getElementById('userEmail').value;
+                
+                if (name && email) {
+                    this.login(name, email);
+                    this.currentTab = 'home';
+                    this.render();
                 }
+            }
 
-                const gridClass = question.choices.length <= 2 ? 'choices-grid-2' :
-                                 question.choices.length <= 5 ? 'choices-grid-5' :
-                                 'choices-grid-10';
+            switchTab(tab) {
+                this.currentTab = tab;
+                this.selectedMatch = null;
+                this.render();
+            }
 
-                return `
-                    <div class="question-card" id="question-${question.id}">
-                        <div class="question-status status-open">受付中</div>
-                        <h3 style="font-size: 16px; margin-bottom: 8px;">${question.title}</h3>
-                        
-                        <div class="question-info">
-                            <div class="question-info-item">
-                                <span>💎</span>
-                                <span>倍率: ${question.odds}倍</span>
-                            </div>
-                            <div class="question-info-item">
-                                <span>📊</span>
-                                <span>上限: ${question.maxBet}p</span>
-                            </div>
+            showQuestionDetail(questionId) {
+                const question = this.questions.find(q => q.id === questionId);
+                if (!question) return;
+
+                // モーダルで詳細表示
+                const modal = document.createElement('div');
+                modal.className = 'modal show';
+                modal.innerHTML = `
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            ${question.icon} ${question.title}
                         </div>
+                        <div class="modal-body">
+                            <div class="question-info">
+                                <div class="info-item">
+                                    <div class="info-label">倍率</div>
+                                    <div class="info-value">${question.odds}倍</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">上限</div>
+                                    <div class="info-value">${question.maxBet}p</div>
+                                </div>
+                            </div>
 
-                        <div class="choices-grid ${gridClass}">
-                            ${question.choices.map(choice => `
-                                <button class="choice-btn" 
-                                    onclick="system.selectChoice('${question.id}', '${choice.value}')"
-                                    data-question="${question.id}" 
-                                    data-choice="${choice.value}">
-                                    ${choice.label}
-                                </button>
-                            `).join('')}
-                        </div>
-
-                        <div id="bet-amount-${question.id}" style="display: none; margin-top: 16px;">
-                            <div class="quick-amounts">
-                                ${[50, 100, 150, 200].map(amount => `
-                                    <button class="quick-amount-btn" 
-                                        onclick="system.setAmount('${question.id}', ${amount})"
-                                        ${amount > this.currentUser.currentPoint ? 'disabled' : ''}>
-                                        ${amount}p
-                                    </button>
+                            <div class="choices choices-${question.choices.length <= 2 ? '2' : '5'}">
+                                ${question.choices.map(choice => `
+                                    <div class="choice" id="choice-${choice.id}" 
+                                         onclick="system.selectChoice('${choice.id}')">
+                                        ${choice.label}
+                                    </div>
                                 `).join('')}
                             </div>
-                            
-                            <div class="form-group">
-                                <input type="number" 
-                                    class="form-input" 
-                                    id="amount-${question.id}"
-                                    placeholder="賭けるポイントを入力"
-                                    min="1" 
-                                    max="${Math.min(question.maxBet, this.currentUser.currentPoint)}"
-                                    onchange="system.updateAmount('${question.id}')">
+
+                            <div class="bet-amount">
+                                <div class="amount-label">ベット金額</div>
+                                <div class="quick-amounts">
+                                    ${[50, 100, 150, 200].map(amount => `
+                                        <div class="amount-btn" 
+                                             onclick="system.setAmount(${amount})"
+                                             ${amount > this.currentUser.currentPoint ? 'style="opacity: 0.5; cursor: not-allowed;"' : ''}>
+                                            ${amount}
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                <input type="number" class="amount-input" id="betAmount" 
+                                       placeholder="金額を入力" min="1" 
+                                       max="${Math.min(question.maxBet, this.currentUser.currentPoint)}">
                             </div>
-                            
-                            <button class="btn btn-primary btn-full" 
-                                onclick="system.showBetModal('${question.id}')"
-                                id="confirm-${question.id}" disabled>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="modal-btn modal-btn-cancel" onclick="system.closeModal()">
+                                キャンセル
+                            </button>
+                            <button class="modal-btn modal-btn-confirm" onclick="system.confirmBet('${question.id}')">
                                 確定する
                             </button>
                         </div>
                     </div>
                 `;
+
+                document.body.appendChild(modal);
+                this.currentModal = modal;
             }
 
-            // イベントリスナー
-            attachEventListeners() {
-                if (this.currentView === 'login') {
-                    const form = document.getElementById('loginForm');
-                    if (form) {
-                        form.addEventListener('submit', (e) => {
-                            e.preventDefault();
-                            const name = document.getElementById('userName').value;
-                            const email = document.getElementById('userEmail').value;
-                            
-                            if (name && email) {
-                                this.login(name, email);
-                                this.currentView = 'home';
-                                this.render();
-                            }
-                        });
-                    }
+            selectChoice(choiceId) {
+                document.querySelectorAll('.choice').forEach(el => el.classList.remove('selected'));
+                document.getElementById(`choice-${choiceId}`).classList.add('selected');
+                this.selectedChoice = choiceId;
+            }
+
+            setAmount(amount) {
+                document.getElementById('betAmount').value = amount;
+                document.querySelectorAll('.amount-btn').forEach(el => el.classList.remove('selected'));
+                event.target.classList.add('selected');
+            }
+
+            closeModal() {
+                if (this.currentModal) {
+                    this.currentModal.remove();
+                    this.currentModal = null;
                 }
             }
 
-            // 選択肢選択
-            selectChoice(questionId, choiceValue) {
-                document.querySelectorAll(`[data-question="${questionId}"]`).forEach(btn => {
-                    btn.classList.remove('selected');
-                });
-                
-                document.querySelector(`[data-question="${questionId}"][data-choice="${choiceValue}"]`).classList.add('selected');
-                document.getElementById(`bet-amount-${questionId}`).style.display = 'block';
-                
-                this.tempBet = this.tempBet || {};
-                this.tempBet[questionId] = { choice: choiceValue, amount: 0 };
-            }
-
-            // 金額設定
-            setAmount(questionId, amount) {
-                document.getElementById(`amount-${questionId}`).value = amount;
-                this.updateAmount(questionId);
-                
-                document.querySelectorAll(`#bet-amount-${questionId} .quick-amount-btn`).forEach(btn => {
-                    btn.classList.remove('active');
-                    if (parseInt(btn.textContent) === amount) {
-                        btn.classList.add('active');
-                    }
-                });
-            }
-
-            // 金額更新
-            updateAmount(questionId) {
-                const amount = parseInt(document.getElementById(`amount-${questionId}`).value) || 0;
-                this.tempBet = this.tempBet || {};
-                if (this.tempBet[questionId]) {
-                    this.tempBet[questionId].amount = amount;
-                }
-                
-                const confirmBtn = document.getElementById(`confirm-${questionId}`);
-                if (amount > 0 && amount <= this.currentUser.currentPoint) {
-                    confirmBtn.disabled = false;
-                    confirmBtn.textContent = `確定する（${amount}p）`;
-                } else {
-                    confirmBtn.disabled = true;
-                    confirmBtn.textContent = '確定する';
-                }
-            }
-
-            // ベットモーダル表示
-            showBetModal(questionId) {
+            confirmBet(questionId) {
+                const amount = parseInt(document.getElementById('betAmount').value);
                 const question = this.questions.find(q => q.id === questionId);
-                const bet = this.tempBet[questionId];
-                
-                if (!question || !bet || !bet.amount) return;
-                
-                this.currentBet = { questionId, ...bet };
-                
-                const content = `
-                    <p><strong>${question.title}</strong></p>
-                    <p>選択: <strong>${bet.choice}</strong></p>
-                    <p>ベット額: <strong>${bet.amount}p</strong></p>
-                    <p>予想払戻: <strong>${Math.floor(bet.amount * question.odds)}p</strong>（${question.odds}倍）</p>
-                    <p style="margin-top: 12px; color: var(--warning);">
-                        ※ この内容は変更できません
-                    </p>
-                `;
-                
-                document.getElementById('betConfirmContent').innerHTML = content;
-                document.getElementById('betModal').classList.add('show');
-            }
+                const choice = question.choices.find(c => c.id === this.selectedChoice);
 
-            // モーダル閉じる
-            closeBetModal() {
-                document.getElementById('betModal').classList.remove('show');
-            }
-
-            // ベット確定
-            confirmBet() {
-                if (!this.currentBet) return;
-                
-                const success = this.placeBet(
-                    this.currentBet.questionId,
-                    this.currentBet.choice,
-                    this.currentBet.amount
-                );
-                
-                if (success) {
-                    this.closeBetModal();
-                    this.render();
+                if (!this.selectedChoice || !amount || amount <= 0) {
+                    alert('選択肢と金額を入力してください');
+                    return;
                 }
-            }
 
-            // ドラフト試合選択
-            selectDraftMatch(matchNum) {
-                this.selectedDraftMatch = matchNum;
-                this.render();
-            }
-
-            // ナビゲーション
-            showMatch(matchId) {
-                this.selectedMatch = matchId;
-                this.currentView = 'match';
-                this.render();
-            }
-
-            showSeries() {
-                this.currentView = 'series';
-                this.render();
-            }
-
-            showHistory() {
-                this.currentView = 'history';
-                this.render();
-            }
-
-            showDraft() {
-                this.currentView = 'draft';
-                this.render();
-            }
-
-            goHome() {
-                this.currentView = 'home';
-                this.render();
+                if (this.placeBet(questionId, choice.value, amount)) {
+                    this.closeModal();
+                    this.render();
+                    alert('ベットが完了しました！');
+                } else {
+                    alert('ベットに失敗しました');
+                }
             }
         }
 
