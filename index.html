@@ -1850,3 +1850,85 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 export { app, analytics };
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Betting Test (User)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: sans-serif; padding: 16px; }
+    .status { font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>試合の状態</h1>
+
+  <p>試合ID:
+    <input id="matchId" type="text" value="lol-finals-2025-11-09">
+    <button id="listenBtn">この試合を表示</button>
+  </p>
+
+  <p>ステータス: <span id="status">未取得</span></p>
+  <p>勝ったチーム: <span id="winner">未取得</span></p>
+  <p id="updatedAt"></p>
+
+  <!-- Firebase v10 CDN -->
+  <script type="module">
+    // ① ここを管理画面と同じfirebaseConfigにしてください
+    const firebaseConfig = {
+      apiKey: "YOUR_KEY",
+      authDomain: "YOUR_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_BUCKET",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+    import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const statusEl = document.getElementById('status');
+    const winnerEl = document.getElementById('winner');
+    const updatedAtEl = document.getElementById('updatedAt');
+    const matchIdInput = document.getElementById('matchId');
+    const listenBtn = document.getElementById('listenBtn');
+
+    let unsubscribe = null;
+
+    function listenMatch(matchId) {
+      // 既存のリスナーがあれば外す
+      if (unsubscribe) unsubscribe();
+
+      const ref = doc(db, "matches", matchId);
+      unsubscribe = onSnapshot(ref, (snap) => {
+        if (snap.exists()) {
+          const data = snap.data();
+          statusEl.textContent = data.status || "不明";
+          winnerEl.textContent = data.winner || "未設定";
+          updatedAtEl.textContent = data.updatedAt ? "更新: " + data.updatedAt.toDate() : "";
+        } else {
+          statusEl.textContent = "存在しません";
+          winnerEl.textContent = "-";
+          updatedAtEl.textContent = "";
+        }
+      }, (err) => {
+        console.error(err);
+        statusEl.textContent = "取得エラー";
+      });
+    }
+
+    // 初期表示用
+    listenBtn.addEventListener('click', () => {
+      const matchId = matchIdInput.value.trim();
+      if (matchId) listenMatch(matchId);
+    });
+
+    // ページ開いた瞬間に1回つなぐ
+    listenMatch(matchIdInput.value.trim());
+  </script>
+</body>
+</html>
