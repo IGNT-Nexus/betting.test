@@ -1827,3 +1827,26 @@
     </script>
 </body>
 </html>
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCOmiGJziLdRFXME60_MGxKUL1c2Xivxko",
+  authDomain: "ignite-btting.firebaseapp.com",
+  projectId: "ignite-btting",
+  storageBucket: "ignite-btting.firebasestorage.app",
+  messagingSenderId: "659559616487",
+  appId: "1:659559616487:web:417a4fe5020df1c793b742",
+  measurementId: "G-G21YRGQ869"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+export { app, analytics };
